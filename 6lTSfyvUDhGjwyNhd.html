@@ -1,0 +1,433 @@
+<html><head><base href="." />
+<title>Sparrow Space - Pioneering Combat Nanosatellites & Space Mining</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Orbitron', sans-serif;
+    }
+
+    body {
+        background-color: #0a0a0f;
+        color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    .stars {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    nav {
+        position: fixed;
+        width: 100%;
+        padding: 1rem;
+        background: rgba(0,0,0,0.8);
+        backdrop-filter: blur(10px);
+        z-index: 100;
+    }
+
+    .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2rem;
+    }
+
+    .nav-links a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #00ffff;
+    }
+
+    .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .hero h1 {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(45deg, #00ffff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+        font-size: 1.5rem;
+        max-width: 800px;
+        margin: 0 auto;
+        color: #aaa;
+    }
+
+    .satellite {
+        width: 200px;
+        height: 200px;
+        margin: 2rem auto;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-20px) rotate(180deg); }
+        100% { transform: translateY(0px) rotate(360deg); }
+    }
+
+    .cta-button {
+        display: inline-block;
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+        background: linear-gradient(45deg, #00ffff, #ff00ff);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 30px;
+        transition: transform 0.3s;
+    }
+
+    .cta-button:hover {
+        transform: scale(1.1);
+    }
+
+    .nanosatellites {
+        min-height: 100vh;
+        padding: 8rem 2rem 4rem;
+        background: linear-gradient(0deg, #0a0a0f 0%, rgba(0,255,255,0.1) 100%);
+    }
+
+    .nanosatellites-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .nanosatellites h2 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #00ffff;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 4rem;
+    }
+
+    .feature-card {
+        background: rgba(0,0,0,0.5);
+        border: 1px solid #00ffff;
+        border-radius: 10px;
+        padding: 2rem;
+        transition: transform 0.3s;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+        color: #ff00ff;
+        margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+        color: #aaa;
+        line-height: 1.6;
+    }
+
+    .combat-satellite {
+        width: 300px;
+        height: 300px;
+        margin: 3rem auto;
+        display: block;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    .space-mining {
+        min-height: 100vh;
+        padding: 8rem 2rem 4rem;
+        background: linear-gradient(0deg, rgba(255,0,255,0.1) 0%, #0a0a0f 100%);
+    }
+
+    .space-mining-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .space-mining h2 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #ff00ff;
+    }
+
+    .mining-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4rem;
+        align-items: center;
+        margin-top: 4rem;
+    }
+
+    .mining-info {
+        color: #aaa;
+        line-height: 1.6;
+    }
+
+    .mining-info h3 {
+        color: #00ffff;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .mining-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .stat-card {
+        background: rgba(0,0,0,0.5);
+        border: 1px solid #ff00ff;
+        border-radius: 10px;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .stat-card h4 {
+        color: #00ffff;
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+        color: #aaa;
+    }
+
+    .mining-animation {
+        width: 100%;
+        height: 400px;
+    }
+
+    @keyframes drill {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @keyframes excavate {
+        0% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
+    }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="stars">
+    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="100%" fill="#0a0a0f"/>
+        <g id="stars"></g>
+    </svg>
+</div>
+
+<nav>
+    <div class="nav-content">
+        <a href="https://sparrowspace.com" class="logo">SPARROW SPACE</a>
+        <div class="nav-links">
+            <a href="https://sparrowspace.com/nanosatellites">Nanosatellites</a>
+            <a href="https://sparrowspace.com/mining">Space Mining</a>
+            <a href="https://sparrowspace.com/about">About</a>
+            <a href="https://sparrowspace.com/contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div>
+        <h1>Pioneering The Future of Space Defense</h1>
+        <svg class="satellite" viewBox="0 0 100 100" style="animation: float 10s infinite ease-in-out">
+            <path d="M20,50 L80,50" stroke="#00ffff" stroke-width="2"/>
+            <rect x="45" y="40" width="10" height="20" fill="#ff00ff"/>
+            <path d="M30,30 L70,70" stroke="#00ffff" stroke-width="2"/>
+            <circle cx="50" cy="50" r="5" fill="#ffffff"/>
+        </svg>
+        <p>Sparrow Space is revolutionizing orbital defense with combat-ready nanosatellites while pioneering sustainable space mining operations for a resource-rich future.</p>
+        <a href="https://sparrowspace.com/contact" class="cta-button">Join the Mission</a>
+    </div>
+</section>
+
+<section class="nanosatellites">
+    <div class="nanosatellites-content">
+        <h2>Combat Nanosatellites</h2>
+        <svg class="combat-satellite" viewBox="0 0 200 200" style="animation: pulse 4s infinite ease-in-out">
+            <!-- Main Body -->
+            <rect x="80" y="60" width="40" height="80" fill="#303040" stroke="#00ffff" stroke-width="2"/>
+            <!-- Solar Panels -->
+            <rect x="20" y="80" width="60" height="40" fill="#1a1a2e" stroke="#00ffff" stroke-width="2"/>
+            <rect x="120" y="80" width="60" height="40" fill="#1a1a2e" stroke="#00ffff" stroke-width="2"/>
+            <!-- Weapons Systems -->
+            <circle cx="100" cy="50" r="10" fill="#ff00ff" stroke="#ffffff" stroke-width="1">
+                <animate attributeName="fill-opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Defense Shield -->
+            <circle cx="100" cy="100" r="70" fill="none" stroke="#00ffff" stroke-width="1" stroke-dasharray="5,5">
+                <animate attributeName="transform" attributeType="XML" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite"/>
+            </circle>
+        </svg>
+        <div class="features-grid">
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 50 50">
+                    <circle cx="25" cy="25" r="20" fill="none" stroke="#00ffff" stroke-width="2"/>
+                    <path d="M25,5 L25,45 M5,25 L45,25" stroke="#00ffff" stroke-width="2"/>
+                </svg>
+                <h3>Precision Targeting</h3>
+                <p>Advanced AI-powered targeting systems capable of identifying and tracking multiple threats simultaneously with unprecedented accuracy.</p>
+            </div>
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 50 50">
+                    <path d="M10,25 C10,15 25,5 40,25 C25,45 10,35 10,25" fill="none" stroke="#ff00ff" stroke-width="2"/>
+                    <circle cx="25" cy="25" r="5" fill="#ff00ff"/>
+                </svg>
+                <h3>Stealth Technology</h3>
+                <p>Cutting-edge cloaking systems and radar-absorbent materials make our nanosatellites virtually undetectable to conventional tracking methods.</p>
+            </div>
+            <div class="feature-card">
+                <svg class="feature-icon" viewBox="0 0 50 50">
+                    <rect x="15" y="15" width="20" height="20" fill="none" stroke="#00ffff" stroke-width="2"/>
+                    <path d="M5,5 L45,45 M5,45 L45,5" stroke="#ff00ff" stroke-width="2"/>
+                </svg>
+                <h3>Rapid Response</h3>
+                <p>Distributed network architecture enables swift deployment and immediate response to emerging threats in orbital space.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="space-mining">
+    <div class="space-mining-content">
+        <h2>Sustainable Space Mining</h2>
+        <div class="mining-grid">
+            <div class="mining-info">
+                <h3>Revolutionizing Resource Extraction</h3>
+                <p>Our advanced mining operations target resource-rich asteroids using sustainable extraction methods and cutting-edge robotics. We're pioneering the future of space resource utilization while maintaining strict environmental standards.</p>
+                
+                <div class="mining-stats">
+                    <div class="stat-card">
+                        <h4>$100T+</h4>
+                        <p>Estimated value of accessible asteroid resources</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>99.9%</h4>
+                        <p>Resource extraction efficiency</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>0%</h4>
+                        <p>Environmental impact on Earth</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>24/7</h4>
+                        <p>Autonomous operation capability</p>
+                    </div>
+                </div>
+            </div>
+            <svg class="mining-animation" viewBox="0 0 400 400">
+                <!-- Asteroid -->
+                <path d="M100,200 Q150,150 200,180 Q250,210 300,190 Q350,170 380,200 Q350,230 300,210 Q250,190 200,220 Q150,250 100,200" 
+                      fill="#444" stroke="#666" stroke-width="2"/>
+                
+                <!-- Mining Robot -->
+                <g style="animation: excavate 3s infinite ease-in-out">
+                    <rect x="180" y="150" width="40" height="60" fill="#303040" stroke="#ff00ff" stroke-width="2"/>
+                    <!-- Robot Arm -->
+                    <path d="M200,170 L240,190" stroke="#00ffff" stroke-width="3"/>
+                    <!-- Drilling Head -->
+                    <circle cx="240" cy="190" r="15" fill="#ff00ff" stroke="#ffffff" style="animation: drill 2s linear infinite">
+                        <animate attributeName="opacity" values="0.5;1;0.5" dur="1s" repeatCount="indefinite"/>
+                    </circle>
+                </g>
+                
+                <!-- Resource Particles -->
+                <g>
+                    <circle cx="250" cy="200" r="3" fill="#00ffff">
+                        <animate attributeName="cy" values="200;180;200" dur="2s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="260" cy="195" r="2" fill="#ff00ff">
+                        <animate attributeName="cy" values="195;175;195" dur="1.5s" repeatCount="indefinite"/>
+                    </circle>
+                    <circle cx="270" cy="205" r="2" fill="#00ffff">
+                        <animate attributeName="cy" values="205;185;205" dur="2.5s" repeatCount="indefinite"/>
+                    </circle>
+                </g>
+                
+                <!-- Solar Panels -->
+                <rect x="160" y="140" width="80" height="10" fill="#1a1a2e" stroke="#00ffff" stroke-width="1"/>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Generate random stars
+    const starsGroup = document.getElementById('stars');
+    for(let i = 0; i < 200; i++) {
+        const star = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        const x = Math.random() * 100 + "%";
+        const y = Math.random() * 100 + "%";
+        const radius = Math.random() * 1.5;
+        const opacity = Math.random();
+        
+        star.setAttribute("cx", x);
+        star.setAttribute("cy", y);
+        star.setAttribute("r", radius);
+        star.setAttribute("fill", "#ffffff");
+        star.setAttribute("opacity", opacity);
+        
+        starsGroup.appendChild(star);
+    }
+
+    // Animate stars twinkling
+    setInterval(() => {
+        const stars = starsGroup.getElementsByTagName('circle');
+        for(let star of stars) {
+            star.setAttribute("opacity", Math.random());
+        }
+    }, 1000);
+</script>
+
+</body></html>
